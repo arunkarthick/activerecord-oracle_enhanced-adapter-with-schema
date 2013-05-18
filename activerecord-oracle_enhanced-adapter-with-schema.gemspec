@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Arunkumar Balu}]
   s.date = %q{2013-03-18}
-  s.description = %q{Forked from rsim's Oracle "enhanced" ActiveRecord adapter. Using this gem, you can specify the schema details in your database.yml file.
-This gem is a tweaked version of original activerecord-oracle_enhanced-adapter gem. Thanks to rsim for such a great library.
+  s.description = %q{Oracle enhanced adapter with schema config support for ActiveRecord (Using this gem, you can specify schema details in database.yml).
+This gem is a tweaked version of original activerecord-oracle_enhanced-adapter gem.
 }
   s.email = %q{arunkarthick.it@gmail.com}
   s.extra_rdoc_files = [
