@@ -1,7 +1,7 @@
-activerecord-oracle_enhanced-adapter
-====================================
+activerecord-oracle_enhanced-adapter-with-schema
+================================================
 
-Oracle enhanced adapter for ActiveRecord (with support to specify schema in database.yml). All credit goes to rsim (http://github.com/rsim). I just added some additional code, so that you can specify the required schema in your database.yml to make a specific schema DB Connection. This is very useful in certain situations like - 
+Oracle enhanced adapter with schema config support for ActiveRecord (Using this gem, you can specify schema details in database.yml). All credit goes to rsim (http://github.com/rsim). I just added some additional code, so that you can specify the required schema in your database.yml to make a specific schema DB Connection. This is very useful in certain situations like - 
 When you need to use two different users in your database. One user is to create/modify tables (Data Definition) in your schema, and one is to use that tables (Data Manipulation) within in the app. (I agree it doesnt make any sense, but when there is a policy, you cant go beyond that unfortunately, if you cant change the policy)
 
 You will see these kind of scenarios in organizations where you have a DBA policy that app user should not be allowed to created/edit tables. And those DDL operations should be done by a separate ADMIN user account. 
