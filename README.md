@@ -1,17 +1,19 @@
 activerecord-oracle_enhanced-adapter-with-schema
 ================================================
 
-Oracle enhanced adapter with schema config support for ActiveRecord (Using this gem, you can specify schema details in database.yml). All credit goes to rsim (http://github.com/rsim). I just added some additional code, so that you can specify the required schema in your database.yml to make a specific schema DB Connection. This is very useful in certain situations like - 
-When you need to use two different users in your database. One user is to create/modify tables (Data Definition) in your schema, and one is to use that tables (Data Manipulation) within in the app. (I agree it doesnt make any sense, but when there is a policy, you cant go beyond that unfortunately, if you cant change the policy)
+Oracle enhanced adapter with schema config support for ActiveRecord (Using this gem, you can specify schema details in database.yml). Using this gem, you can define schema in your database.yml to make a specific schema DB Connection. This is very useful in certain situations like - 
 
-You will see these kind of scenarios in organizations where you have a DBA policy that app user should not be allowed to created/edit tables. And those DDL operations should be done by a separate ADMIN user account. 
+  * The default oracle adapter assumes that the DB user will have all permissions to his schema. For most of the cases, its true. But it will not be true for some cases. When you need to use two different users in your database. One user is to create/modify tables (Data Definition) in your schema, and another one is to use that tables (Data Manipulation) within in the app. So the application user account will not have access to do DDL (I agree it doesnt make any sense, but when there is a policy, you cant go beyond that unfortunately, if you cant change the policy)
+
+    You will see these kind of scenarios in organizations where you have a DBA policy that app user should not be allowed to
+	created/edit tables. And those DDL operations should be done by a separate ADMIN user account. 
 
 DESCRIPTION
 -----------
 
 This repo is forked from rsim/oracle-enhanced repo. So please refer this page [rsim's Oracle Enhanced](http://www.github.com/rsim/oracle-enhanced) for more details.
 
-I just added the additional code, so that we can mention the schema details in our database.yml file, e.g.
+This gem is an enhanced version of rsim's oracle adapter, so that we can mention the schema details in our database.yml file, e.g.
 
     development:
       adapter: oracle_enhanced
@@ -20,10 +22,11 @@ I just added the additional code, so that we can mention the schema details in o
       password: secret
       schema: your_schema_name
 
-PENDING
--------
+Upcoming
+--------
 
   * Adding support to run two types of migrations (DML migration script and DDL migration script) separately without mixing it with each other.
+  * Grants to specific roles through migration (DDL user)
 
 
 INSTALLATION
@@ -101,7 +104,7 @@ LICENSE
 
 (The MIT License)
 
-Copyright (c) 2008-2011 Arunkumar Balu
+Copyright (c) 2013 Arunkumar Balu
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
