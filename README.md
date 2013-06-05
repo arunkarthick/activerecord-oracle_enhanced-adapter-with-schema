@@ -15,18 +15,39 @@ This repo is forked from rsim/oracle-enhanced repo. So please refer this page [r
 
 This gem is an enhanced version of rsim's oracle adapter, so that we can mention the schema details in our database.yml file, e.g.
 
-    development:
+    production:
       adapter: oracle_enhanced
       database: xe
       username: dml_user
       password: secret
       schema: your_schema_name
+	  
+	  
+To run DDL migrations, you can create another custom environment like below
+Note: This custom environment user should have the required privileges (DBA)
 
-Upcoming
---------
+    ddl_production:
+      adapter: oracle_enhanced	
+      database: xe
+      username: ddl_user
+      password: secret
+      schema: your_schema_name 
+	  
+We can manage this custom migration layer by using custom capistrano receipies or other deployment techniques. So whenever you want to create/alter tables, you can use this custom env like below
 
-  * Adding support to run two types of migrations (DML migration script and DDL migration script) separately without mixing it with each other.
-  * Grants to specific roles through migration (DDL user)
+    rake db:migrate RAILS_ENV=ddl_production
+
+
+To grant privileges, you can use below rake task with the custom ddl migration env below (DBA user)	
+
+    rake db:grant:<privilege> TABLE=<tablename> ROLE=<rolename> RAILS_ENV=<custom ddl migration env>
+	
+	Examples:
+	
+	rake db:grant:select TABLE=users ROLE=readonlyuser RAILS_ENV=ddl_production
+	rake db:grant:insert TABLE=users ROLE=webapp RAILS_ENV=ddl_production
+	rake db:grant:update TABLE=users ROLE=webapp RAILS_ENV=ddl_production
+	rake db:grant:delete TABLE=users ROLE=webapp RAILS_ENV=ddl_production
 
 
 INSTALLATION

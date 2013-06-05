@@ -58,6 +58,48 @@ if defined?(drop_database) == 'method'
 end
 
 namespace :db do
+  namespace :grant do
+    task :select => :environment do
+      ActiveRecord::Base.connection.execute "GRANT select on #{TABLE} TO #{ENV['ROLE']}"
+    end
+    
+    task :insert => :environment do
+      ActiveRecord::Base.connection.execute "GRANT insert on #{TABLE} TO #{ENV['ROLE']}"
+    end
+    
+    task :update => :environment do
+      ActiveRecord::Base.connection.execute "GRANT update on #{ENV['TABLE']} TO #{ENV['ROLE']}"
+    end
+    
+    task :delete => :environment do
+      ActiveRecord::Base.connection.execute "GRANT delete on #{ENV['TABLE']} TO #{ENV['ROLE']}"
+    end
+    
+    task :references => :environment do
+      ActiveRecord::Base.connection.execute "GRANT references on #{ENV['TABLE']} TO #{ENV['ROLE']}"
+    end
+    
+    task :alter => :environment do
+      ActiveRecord::Base.connection.execute "GRANT alter on #{ENV['TABLE']} TO #{ENV['ROLE']}"
+    end
+    
+    task :index => :environment do
+      ActiveRecord::Base.connection.execute "GRANT index on #{ENV['TABLE']} TO #{ENV['ROLE']}"
+    end
+    
+    task :execute => :environment do
+      ActiveRecord::Base.connection.execute "GRANT execute on #{ENV['TABLE']} TO #{ENV['ROLE']}"
+    end
+    
+    task :default => :environment do
+      ActiveRecord::Base.connection.execute "GRANT select, insert, update, delete on #{ENV['TABLE']} TO #{ENV['ROLE']}"
+    end
+    
+    task :all => :environment do
+      ActiveRecord::Base.connection.execute "GRANT all on #{ENV['TABLE']} TO #{ENV['ROLE']}"
+    end
+    
+  end
 
   namespace :structure do
     redefine_task :dump => :environment do |existing_actions|
